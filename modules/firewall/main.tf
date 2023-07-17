@@ -1,33 +1,30 @@
 resource "azurerm_public_ip" "pip" {
-  name = var.pip_name
-  resource_group_name = var.resource_group_name
+  name = "testpip"
   location = var.location
-  zones = var.zones
-  allocation_method = var.allocation_method
-  sku = var.sku
+  resource_group_name = var.resource_group_name
+  allocation_method = "Static"
+  sku = "Standard"
 }
 
 resource "azurerm_firewall" "firewall" {
-  name = var.firewall_name
-  resource_group_name = var.resource_group_name
+  name = "testfirewall"
   location = var.location
-  zones = var.zones
-  threat_intel_mode = var.threat_intel_mode
-  sku_name = var.sku_name
-  sku_tier = var.sku_tier
+  resource_group_name = var.resource_group_name
+  sku_name = "AZFW_VNet"
+  sku_tier = "Standard"
   firewall_policy_id = azurerm_firewall_policy.policy.id
-  
+
   ip_configuration {
-    name = "fw_ip_config"
-    subnet_id = var.subnet_id_3
+    name = "configuration"
+    subnet_id = var.subnet_id
     public_ip_address_id = azurerm_public_ip.pip.id
   }
 }
 
 resource "azurerm_firewall_policy" "policy" {
-  name = var.policy_name
-  resource_group_name = var.resource_group_name
+  name = "Policy"
   location = var.location
+  resource_group_name = var.resource_group_name
 }
 
 resource "azurerm_firewall_policy_rule_collection_group" "policy" {

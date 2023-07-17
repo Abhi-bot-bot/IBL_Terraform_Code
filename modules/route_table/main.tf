@@ -1,22 +1,18 @@
 resource "azurerm_route_table" "rt" {
-  name = var.route_table_name
-  resource_group_name = var.resource_group_name
+  name = "route_table"
   location = var.location
+  resource_group_name = var.resource_group_name
+  disable_bgp_route_propagation = false
 
   route {
     name = "route"
-    address_prefix = var.route_address_prefix
-    next_hop_type = var.next_hop_type
+    address_prefix = "0.0.0.0/0"
+    next_hop_type = "VirtualAppliance"
     next_hop_in_ip_address = var.next_hop_in_ip_address
   }
 }
 
-resource "azurerm_subnet_route_table_association" "subnet_association1" {
-  subnet_id = var.subnet_id_1
-  route_table_id = azurerm_route_table.rt.id
-}
-
-resource "azurerm_subnet_route_table_association" "subnet_association2" {
-  subnet_id = var.subnet_id_2
+resource "azurerm_subnet_route_table_association" "rtakssubnet" {
+  subnet_id = var.rt_aks_subnet_id_route
   route_table_id = azurerm_route_table.rt.id
 }

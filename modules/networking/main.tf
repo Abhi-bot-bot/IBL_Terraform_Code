@@ -1,15 +1,14 @@
-resource "azurerm_virtual_network" "vnet" {
+resource "azurerm_virtual_network" "example" {
   name = var.vnet_name
-  resource_group_name = var.resource_group_name
+  address_space = var.address_prefix
   location = var.location
-  address_space = var.vnet_address_space
+  resource_group_name = var.resource_group_name
 }
 
 resource "azurerm_subnet" "subnet" {
   count = length(var.subnet_names)
   name = var.subnet_names[count.index]
   resource_group_name = var.resource_group_name
-  virtual_network_name = azurerm_virtual_network.vnet.name
+  virtual_network_name = azurerm_virtual_network.example.name
   address_prefixes = [var.subnet_address_prefixes[count.index]]
-  depends_on = [ azurerm_virtual_network.vnet ]
 }

@@ -1,27 +1,26 @@
 resource "azurerm_user_assigned_identity" "aks_identity" {
-  resource_group_name = var.resource_group_name
   location = var.location
-
+  resource_group_name = var.resource_group_name
   name = "UserIdentity"
 }
 
 resource "azurerm_kubernetes_cluster" "aks" {
-  name = var.aks_name
-  resource_group_name = var.resource_group_name
+  name = "aks"
   location = var.location
-  kubernetes_version = var.kubernetes_version
-  dns_prefix = var.dns_prefix
-  private_cluster_enabled = var.private_cluster_enabled
+  resource_group_name = var.resource_group_name
+  kubernetes_version = "1.25.6"
+  dns_prefix = "aksdnsprefix"
+  private_cluster_enabled = true
 
   default_node_pool {
-    name = var.default_node_pool_name
-    vm_size = var.default_node_pool_vm_size
-    vnet_subnet_id = var.vnet_subnet_id
-    zones = var.default_node_pool_availability_zones
-    enable_auto_scaling = var.default_node_pool_enable_auto_scaling
-    max_count = var.default_node_pool_max_count
-    min_count = var.default_node_pool_min_count
-    node_count = var.default_node_pool_node_count
+    name = "system"
+    node_count = 1
+    vm_size = "Standard_DS2_v2"
+    vnet_subnet_id = var.aks_subnet_id
+    enable_node_public_ip = false
+    enable_auto_scaling = true
+    max_count = 2
+    min_count = 1
   }
 
   identity {
@@ -30,8 +29,8 @@ resource "azurerm_kubernetes_cluster" "aks" {
   }
 
   network_profile {
-    network_plugin = var.network_plugin
-    network_policy = var.network_policy
-    outbound_type = var.outbound_type
+    network_plugin = "azure"
+    network_policy = "calico"
+    outbound_type = "userDefinedRouting"
   }
 }
