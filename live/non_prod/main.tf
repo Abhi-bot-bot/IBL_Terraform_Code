@@ -85,3 +85,29 @@ module "kv_private_endpoint" {
   #dns_zone_group_name = var.kv_dns_zone_group_name
   # private_dns_zone_ids = [ module.private_dns_zone.private_dns_zone_id ]
 }
+
+module "redis_cache" {
+  source = "../../modules/redis_cache"
+  redis_cache_name = var.redis_cache_name
+  location = data.azurerm_resource_group.rg.location
+  resource_group_name = data.azurerm_resource_group.rg.name
+  capacity = var.capacity
+  family = var.family
+  redis_sku_name = var.redis_sku_name
+  redis_enable_non_ssl_port = var.redis_enable_non_ssl_port
+  redis_minimum_tls_version = var.redis_minimum_tls_version
+  redis_public_network_access_enabled = var.redis_public_network_access_enabled
+
+  depends_on = [ module.key_vault ]
+}
+
+module "redis_private_endpoint" {
+  source = "../../modules/private_endpoint"
+  private_ep_name = var.redis_private_ep_name
+  location = data.azurerm_resource_group.rg.location
+  resource_group_name = data.azurerm_resource_group.rg.name
+  subnet_id = data.azurerm_subnet.subnet[var.indexnumber].id
+  service_connection_name = var.redis_service_connection_name
+  private_connection_resource_id = module.redis_cache.redis_cache_id
+  subresource_names = var.redis_subresource_names
+}
