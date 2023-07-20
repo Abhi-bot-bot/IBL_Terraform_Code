@@ -86,3 +86,47 @@ variable "redis_service_connection_name" {
 variable "redis_subresource_names" {
   type = list(string)
 }
+
+#Storage_Account_1
+variable "storage_account_name_1"{
+  type = string
+}
+
+#storage_account_1_private_endpoint
+variable "sa1_private_ep_name" {
+  type = string
+}
+
+# variable "indexnumber" {
+#   type = number
+# }
+
+variable "sa1_service_connection_name" {
+  type = string
+}
+
+variable "sa1_subresource_names" {
+  type = list(string)
+}
+
+#Storage_Account_2
+variable "storage_account_name_2"{
+  type = string
+}
+
+#storage_account_1_private_endpoint
+variable "sa2_private_ep_name" {
+  type = string
+}
+
+# variable "indexnumber" {
+#   type = number
+# }
+
+variable "sa2_service_connection_name" {
+  type = string
+}
+
+variable "sa2_subresource_names" {
+  type = list(string)
+}

@@ -27,3 +27,15 @@ redis_public_network_access_enabled = true
 redis_private_ep_name = "dev-msme-redis-pe-tf"
 redis_service_connection_name = "dev-msme-redis-sc-tf"
 redis_subresource_names = [ "redisCache" ]
+
+#Storage_account_1
+storage_account_name_1 = "erdfersa1"
+sa1_private_ep_name = "sa1-pe"
+sa1_service_connection_name = "sa1-cs"
+sa1_subresource_names = [ "Blob" ]
+
+#Storage_account_2
+storage_account_name_2 = "abcesa2"
+sa2_private_ep_name = "sa2-pe"
+sa2_service_connection_name = "sa2-cs"
+sa2_subresource_names = [ "Blob" ]

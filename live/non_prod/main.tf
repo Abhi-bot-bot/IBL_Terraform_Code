@@ -111,3 +111,43 @@ module "redis_private_endpoint" {
   private_connection_resource_id = module.redis_cache.redis_cache_id
   subresource_names = var.redis_subresource_names
 }
+
+module "storage_account_1" {
+  source = "../../modules/storage_account"
+  storage_account_name = var.storage_account_name_1
+  location = data.azurerm_resource_group.rg.location
+  resource_group_name = data.azurerm_resource_group.rg.name
+
+  depends_on = [ module.redis_cache ]
+}
+
+module "sa1_private_endpoint" {
+  source = "../../modules/private_endpoint"
+  private_ep_name = var.sa1_private_ep_name
+  location = data.azurerm_resource_group.rg.location
+  resource_group_name = data.azurerm_resource_group.rg.name
+  subnet_id = data.azurerm_subnet.subnet[var.indexnumber].id
+  service_connection_name = var.sa1_service_connection_name
+  private_connection_resource_id = module.storage_account_1.storage_account_id
+  subresource_names = var.sa1_subresource_names
+}
+
+module "storage_account_2" {
+  source = "../../modules/storage_account"
+  storage_account_name = var.storage_account_name_2
+  location = data.azurerm_resource_group.rg.location
+  resource_group_name = data.azurerm_resource_group.rg.name
+
+  depends_on = [ module.redis_cache ]
+}
+
+module "sa2_private_endpoint" {
+  source = "../../modules/private_endpoint"
+  private_ep_name = var.sa2_private_ep_name
+  location = data.azurerm_resource_group.rg.location
+  resource_group_name = data.azurerm_resource_group.rg.name
+  subnet_id = data.azurerm_subnet.subnet[var.indexnumber].id
+  service_connection_name = var.sa2_service_connection_name
+  private_connection_resource_id = module.storage_account_2.storage_account_id
+  subresource_names = var.sa2_subresource_names
+}
