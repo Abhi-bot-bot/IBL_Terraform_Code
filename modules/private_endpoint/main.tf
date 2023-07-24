@@ -15,4 +15,9 @@ resource "azurerm_private_endpoint" "private-endpoint" {
   #   name = var.dns_zone_group_name
   #   private_dns_zone_ids = var.private_dns_zone_ids
   # }
+
+  tags = {
+    Environment = var.environment
+    Application = var.application
+  }
 }

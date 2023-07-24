@@ -33,3 +33,11 @@ variable "redis_minimum_tls_version" {
 variable "redis_public_network_access_enabled" {
   type = bool
 }
+
+variable "environment" {
+  type = string
+}
+
+variable "application" {
+  type = string
+}

@@ -21,3 +21,11 @@ variable "subnet_names" {
 variable "subnet_address_prefixes" {
   type = list(string)
 }
+
+variable "environment" {
+  type = string
+}
+
+variable "application" {
+  type = string
+}

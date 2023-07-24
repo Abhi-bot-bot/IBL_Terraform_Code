@@ -25,4 +25,7 @@ module "networking" {
   address_prefix = var.address_prefix
   subnet_names = var.subnet_names
   subnet_address_prefixes = var.subnet_address_prefixes
+
+  environment = var.environment
+  application = var.application
 }

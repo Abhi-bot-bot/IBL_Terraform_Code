@@ -33,3 +33,11 @@ variable "subresource_names" {
 # variable "private_dns_zone_ids" {
 #   type = list(string)
 # }
+
+variable "environment" {
+  type = string
+}
+
+variable "application" {
+  type = string
+}

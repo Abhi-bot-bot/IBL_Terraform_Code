@@ -7,6 +7,21 @@ resource_group_name = "msme-nonprod-rg"
 subnet_name = [ "AzureFirewallSubnet", "AksSubnet", "Devazureresources" ]
 virtual_network_name = "msme-np-vnet"
 
+#tags
+environment = "dev"
+application = "msme"
+
+#aks
+aks_name = "msme-np-aks"
+kubernetes_version = "1.25.6"
+dns_prefix = "aksdnsprefix"
+private_cluster_enabled = true
+default_node_pool_name = "system"
+default_node_pool_node_count = 1
+default_node_pool_vm_size = "Standard_DS2_v2"
+default_node_pool_max_count = 2
+default_node_pool_min_count = 1
+
 #key_vault
 key_vault_name = "key-fhasdrr"
 # private_dns_zone_name = "privatelink.vaultcore.azure.net"

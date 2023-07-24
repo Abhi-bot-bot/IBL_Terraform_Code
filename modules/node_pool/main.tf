@@ -9,4 +9,9 @@ resource "azurerm_kubernetes_cluster_node_pool" "node_pool" {
   enable_auto_scaling = true
   max_count = 2
   min_count = 1
+
+  tags = {
+    Environment = var.environment
+    Application = var.application
+  }
 }

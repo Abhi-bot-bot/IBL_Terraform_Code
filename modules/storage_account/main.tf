@@ -10,4 +10,9 @@ resource "azurerm_storage_account" "account" {
     default_action = "Deny"
     bypass = [ "None" ]
   }
+
+  tags = {
+    Environment = var.environment
+    Application = var.application
+  }
 }

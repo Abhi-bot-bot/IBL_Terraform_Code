@@ -34,7 +34,19 @@ module "aks" {
   source = "../../modules/aks"
   resource_group_name = data.azurerm_resource_group.rg.name
   location = data.azurerm_resource_group.rg.location
+  aks_name = var.aks_name
+  kubernetes_version = var.kubernetes_version
+  dns_prefix = var.dns_prefix
+  private_cluster_enabled = var.private_cluster_enabled
   aks_subnet_id = data.azurerm_subnet.subnet[1].id
+  default_node_pool_name = var.default_node_pool_name
+  default_node_pool_node_count = var.default_node_pool_node_count
+  default_node_pool_vm_size = var.default_node_pool_max_count
+  default_node_pool_max_count = var.default_node_pool_max_count
+  default_node_pool_min_count = var.default_node_pool_min_count
+
+  environment = var.environment
+  application = var.application
 
   depends_on = [ module.route_table ]
 }
@@ -43,6 +55,9 @@ module "node_pool" {
   source = "../../modules/node_pool"
   kubernetes_cluster_id = module.aks.kubernetes_cluster_id
   depends_on = [ module.aks ]
+
+  environment = var.environment
+  application = var.application
 }
 
 module "route_table" {
@@ -65,6 +80,9 @@ module "key_vault" {
   key_vault_name = var.key_vault_name
   location = data.azurerm_resource_group.rg.location
   resource_group_name = data.azurerm_resource_group.rg.name
+
+  environment = var.environment
+  application = var.application
 }
 
 # module "private_dns_zone" {
@@ -84,6 +102,9 @@ module "kv_private_endpoint" {
   subresource_names = var.kv_subresource_names
   #dns_zone_group_name = var.kv_dns_zone_group_name
   # private_dns_zone_ids = [ module.private_dns_zone.private_dns_zone_id ]
+
+  environment = var.environment
+  application = var.application
 }
 
 module "redis_cache" {
@@ -98,6 +119,9 @@ module "redis_cache" {
   redis_minimum_tls_version = var.redis_minimum_tls_version
   redis_public_network_access_enabled = var.redis_public_network_access_enabled
 
+  environment = var.environment
+  application = var.application
+
   depends_on = [ module.key_vault ]
 }
 
@@ -110,6 +134,9 @@ module "redis_private_endpoint" {
   service_connection_name = var.redis_service_connection_name
   private_connection_resource_id = module.redis_cache.redis_cache_id
   subresource_names = var.redis_subresource_names
+
+  environment = var.environment
+  application = var.application
 }
 
 module "storage_account_1" {
@@ -117,6 +144,9 @@ module "storage_account_1" {
   storage_account_name = var.storage_account_name_1
   location = data.azurerm_resource_group.rg.location
   resource_group_name = data.azurerm_resource_group.rg.name
+
+  environment = var.environment
+  application = var.application
 
   depends_on = [ module.redis_cache ]
 }
@@ -130,6 +160,9 @@ module "sa1_private_endpoint" {
   service_connection_name = var.sa1_service_connection_name
   private_connection_resource_id = module.storage_account_1.storage_account_id
   subresource_names = var.sa1_subresource_names
+
+  environment = var.environment
+  application = var.application
 }
 
 module "storage_account_2" {
@@ -137,6 +170,9 @@ module "storage_account_2" {
   storage_account_name = var.storage_account_name_2
   location = data.azurerm_resource_group.rg.location
   resource_group_name = data.azurerm_resource_group.rg.name
+
+  environment = var.environment
+  application = var.application
 
   depends_on = [ module.redis_cache ]
 }
@@ -150,4 +186,7 @@ module "sa2_private_endpoint" {
   service_connection_name = var.sa2_service_connection_name
   private_connection_resource_id = module.storage_account_2.storage_account_id
   subresource_names = var.sa2_subresource_names
+
+  environment = var.environment
+  application = var.application
 }

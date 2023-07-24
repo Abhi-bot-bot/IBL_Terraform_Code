@@ -8,4 +8,9 @@ resource "azurerm_redis_cache" "redis_cache" {
   enable_non_ssl_port = var.redis_enable_non_ssl_port
   minimum_tls_version = var.redis_minimum_tls_version
   public_network_access_enabled = var.redis_public_network_access_enabled
+
+  tags = {
+    Environment = var.environment
+    Application = var.application
+  }
 }

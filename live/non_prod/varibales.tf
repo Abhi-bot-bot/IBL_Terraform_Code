@@ -10,6 +10,52 @@ variable "virtual_network_name" {
   type = string
 }
 
+#TAGS
+variable "environment" {
+  type = string
+}
+
+variable "application" {
+  type = string
+}
+
+#AKS
+variable "aks_name" {
+  type = string
+}
+
+variable "kubernetes_version" {
+  type = string
+}
+
+variable "dns_prefix" {
+  type = string
+}
+
+variable "private_cluster_enabled" {
+  type = bool
+}
+
+variable "default_node_pool_name" {
+  type = string
+}
+
+variable "default_node_pool_node_count" {
+  type = number
+}
+
+variable "default_node_pool_vm_size" {
+  type = string
+}
+
+variable "default_node_pool_max_count" {
+  type = number
+}
+
+variable "default_node_pool_min_count" {
+  type = number
+}
+
 #key-vault
 variable "key_vault_name" {
   type = string

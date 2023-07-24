@@ -3,6 +3,11 @@ resource "azurerm_virtual_network" "example" {
   address_space = var.address_prefix
   location = var.location
   resource_group_name = var.resource_group_name
+
+  tags = {
+    Environment = var.environment
+    Application = var.application
+  }
 }
 
 resource "azurerm_subnet" "subnet" {

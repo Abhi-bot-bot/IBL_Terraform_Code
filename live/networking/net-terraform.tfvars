@@ -8,3 +8,7 @@ vnet_name = "msme-np-vnet"
 address_prefix = [ "10.4.0.0/16" ]
 subnet_names = [ "AzureFirewallSubnet", "AksSubnet", "Devazureresources" ]
 subnet_address_prefixes = [ "10.4.4.0/24", "10.4.0.0/22", "10.4.5.0/24" ]
+
+#Tags
+environment = "non-prod"
+application = "msme"

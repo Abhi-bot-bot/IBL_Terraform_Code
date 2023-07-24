@@ -16,4 +16,9 @@ resource "azurerm_key_vault" "key-vault" {
     default_action = "Deny"
     bypass = "AzureServices"
   }
+
+  tags = {
+    Environment = var.environment
+    Application = var.application
+  }
 }
