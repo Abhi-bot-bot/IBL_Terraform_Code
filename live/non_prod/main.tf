@@ -41,7 +41,7 @@ module "aks" {
   aks_subnet_id = data.azurerm_subnet.subnet[1].id
   default_node_pool_name = var.default_node_pool_name
   default_node_pool_node_count = var.default_node_pool_node_count
-  default_node_pool_vm_size = var.default_node_pool_max_count
+  default_node_pool_vm_size = var.default_node_pool_vm_size
   default_node_pool_max_count = var.default_node_pool_max_count
   default_node_pool_min_count = var.default_node_pool_min_count
 
@@ -189,4 +189,18 @@ module "sa2_private_endpoint" {
 
   environment = var.environment
   application = var.application
+}
+
+module "Virtual_machine" {
+  source = "../../modules/virtual_machine"
+  location = data.azurerm_resource_group.rg.location
+  resource_group_name = data.azurerm_resource_group.rg.name
+  vm_public_ip_name = var.vm_public_ip_name
+  network_interface_name = var.network_interface_name
+  nic_config_name = var.nic_config_name
+  vm_subnet_id = data.azurerm_subnet.subnet[3].id
+  vm_name = var.vm_name
+  vm_size = var.vm_size
+  admin_username = var.admin_username
+  admin_password = var.admin_password
 }

@@ -176,3 +176,32 @@ variable "sa2_service_connection_name" {
 variable "sa2_subresource_names" {
   type = list(string)
 }
+
+#Virtual_machine
+variable "vm_public_ip_name" {
+  type = string
+}
+
+variable "network_interface_name" {
+  type = string
+}
+
+variable "nic_config_name" {
+  type = string
+}
+
+variable "vm_name" {
+  type = string
+}
+
+variable "vm_size" {
+  type = string
+}
+
+variable "admin_username" {
+  type = string
+}
+
+variable "admin_password" {
+  type = string
+}

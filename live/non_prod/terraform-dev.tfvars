@@ -4,7 +4,7 @@
 # subnet_address_prefixes = [ "10.4.4.0/24", "10.4.0.0/22" ]
 
 resource_group_name = "msme-nonprod-rg"
-subnet_name = [ "AzureFirewallSubnet", "AksSubnet", "Devazureresources" ]
+subnet_name = [ "AzureFirewallSubnet", "AksSubnet", "Devazureresources", "DbvmSubnet" ]
 virtual_network_name = "msme-np-vnet"
 
 #tags
@@ -54,3 +54,12 @@ storage_account_name_2 = "abcesa2"
 sa2_private_ep_name = "sa2-pe"
 sa2_service_connection_name = "sa2-cs"
 sa2_subresource_names = [ "Blob" ]
+
+#Virtual_machine
+vm_public_ip_name = "vm-public-ip"
+network_interface_name = "nic-name"
+nic_config_name = "nic-config-name"
+vm_name = "db-msme-vm"
+vm_size = "Standard_DS1_v2"
+admin_username = "dbazureuser"
+admin_password = "dbazureuser@123"
