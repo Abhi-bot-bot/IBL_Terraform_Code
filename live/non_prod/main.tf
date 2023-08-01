@@ -203,4 +203,7 @@ module "Virtual_machine" {
   vm_size = var.vm_size
   admin_username = var.admin_username
   admin_password = var.admin_password
+
+  environment = var.environment
+  application = var.application
 }

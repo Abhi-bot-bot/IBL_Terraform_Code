@@ -37,3 +37,11 @@ variable "admin_username" {
 variable "admin_password" {
   type = string
 }
+
+variable "environment" {
+  type = string
+}
+
+variable "application" {
+  type = string
+}

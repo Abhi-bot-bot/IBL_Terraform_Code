@@ -53,6 +53,7 @@ resource "azurerm_virtual_machine" "vm" {
   }
 
   tags = {
-    environment = "test"
+    Environment = var.environment
+    Application = var.application
   }
 }
